@@ -2,7 +2,6 @@ set nocompatible
 filetype indent plugin on
 syntax enable
 colors molokai
-
 set hidden
 set autowriteall
 set wildmenu
@@ -24,11 +23,12 @@ set number
 set notimeout ttimeout ttimeoutlen=200
 set pastetoggle=<F11>
 set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-
 set shiftwidth=4
 set softtabstop=4
 set expandtab
- 
+let g:tex_flavor='latex'
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+hi LineNr ctermbg=none
 map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
