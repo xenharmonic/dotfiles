@@ -29,6 +29,5 @@ theme.border_marked        = theme.bg
 
 theme.layout_tileleft   = layout_dir .. "tileleft.png"
 theme.layout_tile = layout_dir .. "tile.png"
-theme.icon_theme = nil
 
 return theme
