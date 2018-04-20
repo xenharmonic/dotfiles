@@ -3,14 +3,11 @@ theme = {}
 theme_dir 	           = "~/.config/awesome/satori/"
 wallpaper_dir              = "~/media/img/wallpapers/"
 layout_dir                 = "~/.config/awesome/satori/layouts/"
-
 theme.font                 = "Bok Monte Carlo 8"
 theme.wallpaper            = wallpaper_dir .. "yin_1.png"
 
 theme.fg                   = "#cccccc"
 theme.bg                   = "#202020"
-
-
 theme.bg_normal            = theme.bg
 theme.bg_systray           = theme.bg
 theme.bg_focus             = "#604060"
