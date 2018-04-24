@@ -7,7 +7,7 @@ theme.font                 = "Bok Monte Carlo 8"
 theme.wallpaper            = wallpaper_dir .. "yin_1.png"
 
 theme.fg                   = "#cccccc"
-theme.bg                   = "#202020"
+theme.bg                   = "#181818"
 theme.bg_normal            = theme.bg
 theme.bg_systray           = theme.bg
 theme.bg_focus             = "#604060"
@@ -26,5 +26,7 @@ theme.border_marked        = theme.bg
 
 theme.layout_tileleft   = layout_dir .. "tileleft.png"
 theme.layout_tile = layout_dir .. "tile.png"
+theme.layout_tilebottom   = layout_dir .. "tilebottom.png"
+theme.layout_tiletop = layout_dir .. "tiletop.png"
 
 return theme
