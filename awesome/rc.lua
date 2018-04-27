@@ -1,11 +1,11 @@
 local gears = require("gears")
-local awful = require("awful")
-awful.rules = require("awful.rules")
-require("awful.autofocus")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
+local awful = require("awful")
+awful.rules = require("awful.rules")
+require("awful.autofocus")
 
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
@@ -272,7 +272,7 @@ awful.rules.rules = {
                      size_hints_honor = false,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-     { rule = { class = "Firefox" },
+     { rule = { class = "Qutebrowser" },
        properties = { tag = tags[1][4] } },
 }
 
