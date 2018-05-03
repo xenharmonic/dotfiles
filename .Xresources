@@ -1,4 +1,5 @@
-URxvt*font:		xft:BokMonteCarlo:size=8
+URxvt*font:		xft:BokMonteCarlo:size=8, \
+                        xft:shinonome:size=8 
 xft.dpi:		96
 xft.antialias:		false
 xft.hinting:		false

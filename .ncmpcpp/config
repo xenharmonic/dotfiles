@@ -16,7 +16,6 @@ visualizer_color = 99
 # PLAYLIST
 song_columns_list_format = (30)[99]{a} (30)[250]{t|f:Title} (30)[99]{b} (7f)[250]{l}
 playlist_show_remaining_time = yes
-playlist_separate_albums = yes
 header_visibility = no
 statusbar_visibility = yes
 titles_visibility = no
