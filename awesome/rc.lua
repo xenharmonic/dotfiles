@@ -4,6 +4,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local awful = require("awful")
+local lain = require("lain")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
 
@@ -31,14 +32,9 @@ modkey = "Mod4"
 terminal = "urxvt"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
-
-theme_dir = "~/.config/awesome/satori"
+theme_dir = "~/.config/awesome/theme/"
+icon_dir = theme_dir .. "icons/"
 beautiful.init(theme_dir .. "/theme.lua") 
-if beautiful.wallpaper then
-    for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-    end
-end
 
 local layouts = {
     awful.layout.suit.tile,
@@ -49,12 +45,55 @@ local layouts = {
 
 tags = {}
 for s = 1, screen.count() do
-    tags[s] = awful.tag({ "admin", "code" , "media", "web" }, s, layouts[1])
+    tags[s] = awful.tag({ "", "" , "", "", "" }, s, layouts[1])
 end
 
-menubar.utils.terminal = terminal 
-mytextclock = awful.widget.textclock()
-mywibox = {}
+icon_col = "#208020"
+format_icon = function(icon) 
+    return "<span foreground=\""..icon_col.."\">"..icon.."</span>"
+end
+
+mpd_icon = wibox.widget.textbox()
+mpd_icon:set_markup(format_icon(""))
+
+bat_icon = wibox.widget.textbox()
+bat_icon:set_markup(format_icon(""))
+
+bat_icon = wibox.widget.textbox()
+bat_icon:set_markup(format_icon(""))
+
+clock_icon = wibox.widget.textbox()
+clock_icon:set_markup(format_icon(""))
+
+separator = wibox.widget.textbox()
+separator:set_opacity(0.25)
+separator:set_markup("┊")
+space = wibox.widget.textbox()
+space:set_markup(" ")
+
+local mpd = lain.widget.mpd({
+    settings = function()
+        widget:set_markup(" " .. mpd_now.artist .. " - " .. mpd_now.title)
+    end
+})
+
+
+local bat = lain.widget.bat({
+    settings = function()
+	widget:set_markup(" " .. bat_now.perc .. "% ")
+    end
+})
+
+local net = lain.widget.net({
+    wifi_state = "on",
+    settings = function()
+	widget:set_markup(net_now.sent)
+    end
+})
+
+local clock = wibox.widget.textclock(" %H:%M")
+
+panel = {}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
@@ -111,27 +150,40 @@ for s = 1, screen.count() do
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
-    mywibox[s] = awful.wibox({ 
+    panel[s] = awful.wibar({ 
         position = "top", 
         screen = s, 
-        height = 18 
+        height = 16
     })
 
     local left_layout = wibox.layout.fixed.horizontal()
+    left_layout:add(separator)
     left_layout:add(mytaglist[s])
+    left_layout:add(separator)
     left_layout:add(mylayoutbox[s])
+    left_layout:add(separator)
+    left_layout:add(space)
+    left_layout:add(space)
     left_layout:add(mypromptbox[s])
 
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mytextclock)
 
+    right_layout:add(mpd_icon)
+    right_layout:add(mpd.widget)
+    right_layout:add(separator)
+    right_layout:add(space)
+    right_layout:add(bat_icon)	
+    right_layout:add(bat.widget)
+    right_layout:add(clock_icon)	
+    right_layout:add(clock)
+    right_layout:add(space)
+    right_layout:add(wibox.widget.systray())
 
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
     layout:set_middle(mytasklist[s])
     layout:set_right(right_layout)
-    mywibox[s]:set_widget(layout)
+    panel[s]:set_widget(layout)
 end
 
 root.buttons(awful.util.table.join(
@@ -141,9 +193,6 @@ root.buttons(awful.util.table.join(
 ))
 
 globalkeys = awful.util.table.join(
-
-    awful.key({},                    "XF86Calculator", function () awful.util.spawn("mpc toggle") end),
-
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
@@ -190,13 +239,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end),
     awful.key({ modkey }, "p", function() menubar.show() end)
 )
 
@@ -272,8 +314,8 @@ awful.rules.rules = {
                      size_hints_honor = false,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-     { rule = { class = "Qutebrowser" },
-       properties = { tag = tags[1][4] } },
+     { rule = { class = "Firefox" },
+       properties = { tag = tags[1][5] } },
 }
 
 client.connect_signal("manage", function (c, startup)

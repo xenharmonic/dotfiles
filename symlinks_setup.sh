@@ -17,9 +17,6 @@ ln -s $DIR/.zsh ~
 rm -rf ~/.vim
 ln -s $DIR/.vim ~
 
-rm -rf ~/.config/awesome
-ln -s $DIR/awesome ~/.config
-
 rm -rf ~/.ncmpcpp
 ln -s $DIR/.ncmpcpp ~
 

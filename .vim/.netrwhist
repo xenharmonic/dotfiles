@@ -1,7 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/home/satori/.config/awesome/satori'
-let g:netrw_dirhist_2='/home/satori/.config'
-let g:netrw_dirhist_3='/home/satori/.dotfiles'
-let g:netrw_dirhist_4='/home/satori/.vim'
-let g:netrw_dirhist_5='/home/reid/.scripts'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/reid/.bin/slstatus'
+let g:netrw_dirhist_2='/home/reid/.bin/dwm'
+let g:netrw_dirhist_3='/home/reid/.bin/slstatus'
+let g:netrw_dirhist_4='/home/reid/.dotfiles/awesome/lain'

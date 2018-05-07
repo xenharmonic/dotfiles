@@ -1,5 +1,5 @@
-URxvt*font:		xft:BokMonteCarlo:size=8, \
-                        xft:shinonome:size=8 
+URxvt*font:		xft:MonteCarlo:size=8, \
+                        xft:siji:size=10
 xft.dpi:		96
 xft.antialias:		false
 xft.hinting:		false
@@ -7,44 +7,42 @@ xft.hinting:		false
 URxvt*cursorBlink:      true
 URxvt*scrollBar:	false
 URxvt*transparent:	true
-URxvt*shading:		30
+URxvt*shading:		10
 
-#define col0 #202020
-#define col1 #3B4252
-#define col2 #434C5E
-#define col3 #4C566A
-#define col4 #D8DEE9
-#define col5 #E5E9F0
-#define col6 #ECEFF4
-#define col7 #8FBCBB
-#define col8 #88C0D0
-#define col9 #81A1C1
-#define col10 #5E81AC
-#define col11 #BF616A
-#define col12 #D08770
-#define col13 #EBCB8B
-#define col14 #A3BE8C
-#define col15 #B48EAD
+! special
+*.foreground:   #a7a7a7
+*.background:   #1e1e1e
+*.cursorColor:  #a7a7a7
 
-*.color0: col1
-*.color1: col11
-*.color2: col14
-*.color3: col13
-*.color4: col9
-*.color5: col15
-*.color6: col8
-*.color7: col5
-*.color8: col3
-*.color9: col11
-*.color10: col14
-*.color11: col13
-*.color12: col9
-*.color13: col15
-*.color14: col7
-*.color15: col6
+! black
+*.color0:       #1e1e1e
+*.color8:       #5f5a60
 
-*.foreground: col4
-*.background: col0
-*.cursorColor: col4
-*fading: col35
-*fadeColor: col3
+! red
+*.color1:       #cf6a4c
+*.color9:       #cf6a4c
+
+! green
+*.color2:       #8f9d6a
+*.color10:      #8f9d6a
+
+! yellow
+*.color3:       #f9ee98
+*.color11:      #f9ee98
+
+! blue
+*.color4:       #7587a6
+*.color12:      #7587a6
+
+! magenta
+*.color5:       #9b859d
+*.color13:      #9b859d
+
+! cyan
+*.color6:       #afc4db
+*.color14:      #afc4db
+
+! white
+*.color7:       #a7a7a7
+*.color15:      #ffffff
+
