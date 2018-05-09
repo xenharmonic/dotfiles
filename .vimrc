@@ -1,3 +1,4 @@
+execute pathogen#infect()
 set nocompatible
 filetype indent plugin on
 syntax enable

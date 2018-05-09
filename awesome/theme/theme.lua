@@ -9,7 +9,7 @@ theme.taglist_font         = "siji 8"
 theme.bg                   = "#181818"
 theme.bg2	           = "#545454"		
 theme.fg                   = "#cccccc"
-theme.fg2                  = "#208020"
+theme.fg2                  = "#875faf"
 
 theme.taglist_fg           = theme.fg
 theme.taglist_fg_focus     = theme.fg2

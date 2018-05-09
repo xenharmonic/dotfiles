@@ -8,6 +8,7 @@ local lain = require("lain")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
 
+-- error checking
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Oops, there were errors during startup!",
@@ -28,6 +29,7 @@ do
     end)
 end
 
+-- variables
 modkey = "Mod4"
 terminal = "urxvt"
 editor = "vim"
@@ -36,6 +38,7 @@ theme_dir = "~/.config/awesome/theme/"
 icon_dir = theme_dir .. "icons/"
 beautiful.init(theme_dir .. "/theme.lua") 
 
+-- layouts
 local layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -43,12 +46,14 @@ local layouts = {
     awful.layout.suit.tile.top
 }
 
+-- tags
 tags = {}
 for s = 1, screen.count() do
     tags[s] = awful.tag({ "", "" , "", "", "" }, s, layouts[1])
 end
 
-icon_col = "#208020"
+-- widgets
+icon_col = beautiful.fg2
 format_icon = function(icon) 
     return "<span foreground=\""..icon_col.."\">"..icon.."</span>"
 end
@@ -71,12 +76,22 @@ separator:set_markup("┊")
 space = wibox.widget.textbox()
 space:set_markup(" ")
 
+
 local mpd = lain.widget.mpd({
+
     settings = function()
+        artist = mpd_now.artist .. " "
+        title  = mpd_now.title  .. " "
+        if mpd_now.state == "pause" then
+            artist = "mpd "
+            title  = "paused "
+        elseif mpd_now.state == "stop" then
+            artist = ""
+            title  = ""
+        end
         widget:set_markup(" " .. mpd_now.artist .. " - " .. mpd_now.title)
     end
 })
-
 
 local bat = lain.widget.bat({
     settings = function()
@@ -167,13 +182,14 @@ for s = 1, screen.count() do
     left_layout:add(mypromptbox[s])
 
     local right_layout = wibox.layout.fixed.horizontal()
-
     right_layout:add(mpd_icon)
     right_layout:add(mpd.widget)
     right_layout:add(separator)
     right_layout:add(space)
     right_layout:add(bat_icon)	
     right_layout:add(bat.widget)
+    right_layout:add(separator)
+    right_layout:add(space)
     right_layout:add(clock_icon)	
     right_layout:add(clock)
     right_layout:add(space)
@@ -186,6 +202,7 @@ for s = 1, screen.count() do
     panel[s]:set_widget(layout)
 end
 
+-- mousebinds
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
@@ -193,6 +210,13 @@ root.buttons(awful.util.table.join(
 ))
 
 globalkeys = awful.util.table.join(
+
+-- keybinds
+    awful.key({},                    "XF86AudioLowerVolume",    function() awful.util.spawn("amixer -c 0 set PCM 2dB-") end),
+    awful.key({},                    "XF86AudioRaiseVolume",    function() awful.util.spawn("amixer -c 0 set PCM 2dB+") end),
+    awful.key({},                    "XF86MonBrightnessDown",   function() awful.util.spawn("xbacklight -dec 10") end),
+    awful.key({},                    "XF86MonBrightnessUp",     function() awful.util.spawn("xbacklight -inc 10") end),
+
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
@@ -243,9 +267,9 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+    awful.key({ modkey, "Shift"   }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey,           }, "x",      function (c) c:kill()                         end),
+    awful.key({ modkey,           }, "f",      awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),

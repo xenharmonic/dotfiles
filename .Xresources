@@ -7,7 +7,7 @@ xft.hinting:		false
 URxvt*cursorBlink:      true
 URxvt*scrollBar:	false
 URxvt*transparent:	true
-URxvt*shading:		10
+URxvt*shading:		50
 
 ! special
 *.foreground:   #a7a7a7
