@@ -8,6 +8,10 @@ hi Normal ctermbg=none
 hi NonText ctermbg=none
 hi LineNr ctermbg=none
 
+let g:sclangTerm = "urxvt -e $SHELL"
+let g:sclangPipeApp     = "~/.vim/bundle/scvim/bin/start_pipe"
+let g:sclangDispatcher  = "~/.vim/bundle/scvim/bin/sc_dispatcher"
+
 set hidden
 set autowriteall
 set wildmenu
@@ -34,3 +38,5 @@ set softtabstop=4
 set expandtab
 
 map Y y$
+
+

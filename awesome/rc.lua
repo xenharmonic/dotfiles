@@ -35,7 +35,6 @@ terminal = "urxvt"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 theme_dir = "~/.config/awesome/theme/"
-icon_dir = theme_dir .. "icons/"
 beautiful.init(theme_dir .. "/theme.lua") 
 
 -- layouts
@@ -108,6 +107,7 @@ local net = lain.widget.net({
 
 local clock = wibox.widget.textclock(" %H:%M")
 
+-- layouts
 panel = {}
 mypromptbox = {}
 mylayoutbox = {}
